@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "coin-e468d": {
+      "hosting": {
+        "coin": [
+          "coin-e468d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "coin-e468d"
+  }
+}

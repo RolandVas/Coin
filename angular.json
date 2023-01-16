@@ -100,6 +100,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "coin:build:production",
+            "firebaseProject": "coin-e468d",
+            "firebaseHostingSite": "coin-e468d"
+          }
         }
       }
     }
