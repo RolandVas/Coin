@@ -1,0 +1,21 @@
+@import "/src/assets/scss/variable.scss";
+
+.head {
+    box-sizing: border-box; // remove padding -> padding making the element wider than 1440px
+    width: 100%;
+    height: 500px;
+    background-color: $primary-color;
+
+    h2 {
+        text-align: center;
+        color: white;
+        padding-top: 16px;
+        padding-bottom: 300px;
+    }
+
+    .count {
+        color: white;
+        font-size: 70px;
+        font-weight: 600;
+    }
+}

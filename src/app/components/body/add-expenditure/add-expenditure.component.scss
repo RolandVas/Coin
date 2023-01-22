@@ -1,0 +1,10 @@
+@import "/src/assets/scss/variable.scss";
+
+button {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%); // Center a position:fixed element
+    color: white;
+    background-color: $primary-color;
+}
