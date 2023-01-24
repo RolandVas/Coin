@@ -15,6 +15,10 @@ export class ExpenditureDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  press(key: any) {
+    console.log(key)
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }

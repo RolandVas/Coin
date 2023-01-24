@@ -1,6 +1,7 @@
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 import { NgNumericKeyboardModule } from 'ng-numeric-keyboard';
 
@@ -42,6 +43,7 @@ import { ExpenditureDialogComponent } from './dialog/expenditure-dialog/expendit
     MatIconModule,
     MatDialogModule,
     NgNumericKeyboardModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

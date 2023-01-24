@@ -2,3 +2,10 @@
     <p>body works!</p>
     <app-add-expenditure></app-add-expenditure>
 </div>
+
+
+<input type="text" [(ngModel)]="inputValue" name="inputValue">
+<div id="keypad">
+  <button *ngFor="let num of numbers" (click)="addNumber(num)">{{ num }}</button>
+  <button (click)="deleteNumber()">Delete</button>
+</div>
