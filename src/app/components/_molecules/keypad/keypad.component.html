@@ -1,0 +1,15 @@
+<input type="text" [(ngModel)]="inputValue" name="inputValue" readonly> <!-- readoly for mobile > disable keyboard ? -->
+
+<div class="keypad">
+  <div class="keypad_container grid">
+    <div *ngFor="let num of numbers" class="keypad_container-n{{ num }} full-width">
+<!--      <button (click)="addNumber(num)">{{ num }}</button>-->
+      <div (click)="addNumber(num)" class="number-btn">
+        <p>{{ num }}</p>
+      </div>
+    </div>
+    <div class="keypad_container-ndel">
+      <button (click)="deleteNumber()">Delete</button>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,8 @@
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-
-import { NgNumericKeyboardModule } from 'ng-numeric-keyboard';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,6 +20,7 @@ import { HeadComponent } from './components/head/head.component';
 import { BodyComponent } from './components/body/body.component';
 import { AddExpenditureComponent } from './components/body/add-expenditure/add-expenditure.component';
 import { ExpenditureDialogComponent } from './dialog/expenditure-dialog/expenditure-dialog.component';
+import { KeypadComponent } from './components/_molecules/keypad/keypad.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { ExpenditureDialogComponent } from './dialog/expenditure-dialog/expendit
     HeadComponent,
     BodyComponent,
     AddExpenditureComponent,
-    ExpenditureDialogComponent
+    ExpenditureDialogComponent,
+    KeypadComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +43,8 @@ import { ExpenditureDialogComponent } from './dialog/expenditure-dialog/expendit
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    NgNumericKeyboardModule,
-    FormsModule
+    FormsModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

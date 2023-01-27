@@ -2,6 +2,22 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
 
+## Packages
+
++ `npm install`
++ `npm install ng-numeric-keyboard`
++ `ng add @angular/material`
++ `ng add @angular/fire`
+
+### Numeric-keyboard
+[Numeric-Keyboard](https://www.npmjs.com/package/ng-numeric-keyboard)
+
+### Angular material
+[Angular Material Design](https://material.angular.io/guide/getting-started)
+
+### Angular firebase
+[AngularFire](https://github.com/angular/angularfire)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

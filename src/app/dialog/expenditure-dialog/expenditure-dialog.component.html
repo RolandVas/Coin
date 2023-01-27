@@ -1,9 +1,33 @@
-<h1 mat-dialog-title>Kiadás</h1>
-<div mat-dialog-content>
-    <p>What's your favorite animal?</p>
+<h1 mat-dialog-title>Add</h1>
 
-</div>
-<div mat-dialog-actions>
+<form>
+  <div class="details_dialog__content grid">
+
+    <div class="details_dialog__content-area--add">
+      <mat-form-field class="full-width">
+        <mat-label>add</mat-label>
+        <input matInput placeholder="1500" type="number">
+      </mat-form-field>
+    </div>
+
+    <div class="details_dialog__content-area--cat">
+      <mat-form-field class="full-width">
+        <mat-label>comment</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="details_dialog__content-area--com">
+      <mat-form-field class="full-width">
+        <mat-label>test</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
     <button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
-</div>
+  </div>
+</form>

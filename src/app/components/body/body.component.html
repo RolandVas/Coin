@@ -4,8 +4,4 @@
 </div>
 
 
-<input type="text" [(ngModel)]="inputValue" name="inputValue">
-<div id="keypad">
-  <button *ngFor="let num of numbers" (click)="addNumber(num)">{{ num }}</button>
-  <button (click)="deleteNumber()">Delete</button>
-</div>
+<app-keypad></app-keypad>
