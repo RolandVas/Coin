@@ -1,8 +1,9 @@
 import { MatButtonModule } from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,7 +11,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
@@ -21,6 +21,7 @@ import { BodyComponent } from './components/body/body.component';
 import { AddExpenditureComponent } from './components/body/add-expenditure/add-expenditure.component';
 import { ExpenditureDialogComponent } from './dialog/expenditure-dialog/expenditure-dialog.component';
 import { KeypadComponent } from './components/_molecules/keypad/keypad.component';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { KeypadComponent } from './components/_molecules/keypad/keypad.component
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    AngularFireModule.initializeApp(environment.firebase),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
@@ -45,6 +46,7 @@ import { KeypadComponent } from './components/_molecules/keypad/keypad.component
     MatDialogModule,
     FormsModule,
     MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

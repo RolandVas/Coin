@@ -1,33 +1,22 @@
 <h1 mat-dialog-title>Add</h1>
 
-<form>
-  <div class="details_dialog__content grid">
+<form [formGroup]="expeditureForm" (ngSubmit)="onSubmit()">
+  <div class="expediture_form">
 
-    <div class="details_dialog__content-area--add">
-      <mat-form-field class="full-width">
-        <mat-label>add</mat-label>
-        <input matInput placeholder="1500" type="number">
-      </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>comment</mat-label>
+      <input matInput type="text" formControlName="comment">
+    </mat-form-field>
+
+    <div class="full-width mid">
+      <app-keypad (amount)="addAmountOfMoneyToForm($event)"></app-keypad>
     </div>
 
-    <div class="details_dialog__content-area--cat">
-      <mat-form-field class="full-width">
-        <mat-label>comment</mat-label>
-        <input matInput>
-      </mat-form-field>
+    <div mat-dialog-actions>
+      <button type="button" mat-button (click)="onNoClick()">No Thanks</button>
+      <button type="submit" mat-button cdkFocusInitial [disabled]="!expeditureForm.valid">Ok</button>
     </div>
+    <p *ngIf="expeditureForm.controls['amount'].errors?.['required']" class="error">Amount of money is required</p>
 
-    <div class="details_dialog__content-area--com">
-      <mat-form-field class="full-width">
-        <mat-label>test</mat-label>
-        <input matInput>
-      </mat-form-field>
-    </div>
-
-  </div>
-
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
   </div>
 </form>

@@ -1,4 +1,19 @@
+.nummeric_keypaad {
+width: 450px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+}
+
+.keypad_input {
+  width: 300px;
+  height: 32px;
+  margin: 32px 0 32px;
+}
+
 .number-btn {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +23,12 @@
 
 
 .keypad {
+  width: 100%;
 
+  p {
+    vertical-align: middle;
+  }
+  
   &_container{
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:

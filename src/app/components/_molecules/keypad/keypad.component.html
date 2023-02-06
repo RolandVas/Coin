@@ -1,15 +1,18 @@
-<input type="text" [(ngModel)]="inputValue" name="inputValue" readonly> <!-- readoly for mobile > disable keyboard ? -->
+<div class="nummeric_keypaad">
+  <input class="keypad_input" type="text" [(ngModel)]="inputValue" name="inputValue" readonly #amountOfMoney> <!-- readoly for mobile > disable keyboard ? -->
 
-<div class="keypad">
-  <div class="keypad_container grid">
-    <div *ngFor="let num of numbers" class="keypad_container-n{{ num }} full-width">
-<!--      <button (click)="addNumber(num)">{{ num }}</button>-->
-      <div (click)="addNumber(num)" class="number-btn">
-        <p>{{ num }}</p>
+  <div class="keypad">
+    <div class="keypad_container grid">
+      <div *ngFor="let num of numbers" class="keypad_container-n{{ num }} full-width">
+        <div (click)="addNumber(num)" (click)="emitAmountOfMoney(amountOfMoney.value)" class="number-btn">
+          <p>{{ num }}</p>
+        </div>
       </div>
-    </div>
-    <div class="keypad_container-ndel">
-      <button (click)="deleteNumber()">Delete</button>
+      <div class="keypad_container-ndel">
+        <div (click)="deleteNumber()" (click)="emitAmountOfMoney(amountOfMoney.value)" class="number-btn">
+          <p>Delete</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

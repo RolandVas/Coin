@@ -1,2 +1,4 @@
-export interface Transaction {
+export interface TransactionOfMoney {
+    comment?: string
+    amount: number
 }

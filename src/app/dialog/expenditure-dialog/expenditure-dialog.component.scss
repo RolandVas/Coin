@@ -1,21 +1,6 @@
-.details_dialog {
-
-  &__content {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "add   com"
-      "test  test";
-
-    &-area--add {
-      grid-area: add;
-    }
-
-    &-area--com {
-      grid-area: com;
-    }
-
-    &-area--test {
-      grid-area: test;
-    }
-  }
+.expediture_form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
