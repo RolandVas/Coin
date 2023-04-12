@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AppServiceService } from 'src/app/_service/app-service.service';
+import { FirestoreService } from 'src/app/_service/firestore.service';
 import { TransactionOfMoney } from 'src/app/_interface/transaction';
 
 @Component({
@@ -13,13 +13,15 @@ export class ExpenditureDialogComponent implements OnInit {
 
   expeditureForm: FormGroup = new FormGroup ({
     comment: new FormControl(),
-    amount: new FormControl('', Validators.required)
+    amount: new FormControl('', Validators.required),
+    date: new FormControl(),
   })
 
   constructor(
     public dialogRef: MatDialogRef<ExpenditureDialogComponent>,
-    public appService: AppServiceService
-    ) { }
+    public appService: FirestoreService,
+    ) {
+  }
 
   ngOnInit(): void {
   }
@@ -29,14 +31,13 @@ export class ExpenditureDialogComponent implements OnInit {
   }
 
   onSubmit() {
+    const date: any = Date.now()
+    this.expeditureForm.controls['date'].setValue(date)
+    console.log(this.expeditureForm)
     const transaction: TransactionOfMoney = this.expeditureForm.value
     this.appService.saveTransactionOnFirebase(transaction)
     console.log('expeditureForm submitted')
     this.dialogRef.close();
-  }
-
-  addAmountOfMoneyToForm(amountOfMoney: string) {
-    this.expeditureForm.controls['amount'].setValue(amountOfMoney)
   }
 
 }

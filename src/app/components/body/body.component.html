@@ -1,16 +1,21 @@
-<div class="padding-s2" *ngIf="transactions.length > 0;else noItems">
-    
-    <div *ngFor="let transaction of transactions">
-        <p>Amount of money: {{ transaction.amount }} </p>
-        <p>Comment: {{ transaction.comment }} </p>
-        <hr>
-    </div>
-    
+<div class="padding-s2" *ngIf="transactions!.length > 0; else noItems">
+  <hr>
+<h2>Total amount: {{ appService.totalAmount }}</h2>
+  <hr>
+  <div *ngFor="let transaction of transactions">
+    <p>Amount of money: {{ transaction.amount }} </p>
+    <p>Comment: {{ transaction.comment }} </p>
+    <p>Time: {{ transaction.date | date:'HH:mm'}}</p>
+    <p>Date: {{ transaction.date | date:'yyyy.MM.dd'}}</p>
+    <button (click)="deleteTransaction(transaction)">Delete</button>
+    <hr>
+  </div>
+
 </div>
 
 <ng-template #noItems>
-    <h3>There are no items of list</h3>
-    <hr>
+  <h3>There are no items of list</h3>
+  <hr>
 </ng-template>
 
 <app-add-expenditure></app-add-expenditure>
