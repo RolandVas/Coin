@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { Subject, takeUntil } from 'rxjs'
 
@@ -15,9 +15,7 @@ import { Subject, takeUntil } from 'rxjs'
   ],
 })
 
-export class KeypadComponent implements OnInit, ControlValueAccessor {
-
-  @Output() amount = new EventEmitter<string>()
+export class KeypadComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   public amountOfMoneyControl = new FormControl() // ControlValueAccessor
 
@@ -25,13 +23,13 @@ export class KeypadComponent implements OnInit, ControlValueAccessor {
 
   numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  private destroyed$: Subject<any> = new Subject<any>()
+  private unsubscribe$ = new Subject<void>()
 
   constructor() { }
 
   ngOnInit(): void {
     this.amountOfMoneyControl.valueChanges.pipe(
-      takeUntil(this.destroyed$),
+      takeUntil(this.unsubscribe$)
     ).subscribe(formValue => {
       this.onChange(formValue)
       this.onTouched()
@@ -39,8 +37,8 @@ export class KeypadComponent implements OnInit, ControlValueAccessor {
   }
 
   public ngOnDestroy(): void {
-    this.destroyed$.next(true)
-    this.destroyed$.complete()
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 
   addNumber(num: number) {

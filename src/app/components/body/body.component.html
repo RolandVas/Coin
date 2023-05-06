@@ -1,14 +1,23 @@
-<div class="padding-s2" *ngIf="transactions!.length > 0; else noItems">
-  <hr>
-<h2>Total amount: {{ appService.totalAmount }}</h2>
-  <hr>
-  <div *ngFor="let transaction of transactions">
-    <p>Amount of money: {{ transaction.amount }} </p>
-    <p>Comment: {{ transaction.comment }} </p>
-    <p>Time: {{ transaction.date | date:'HH:mm'}}</p>
-    <p>Date: {{ transaction.date | date:'yyyy.MM.dd'}}</p>
-    <button (click)="deleteTransaction(transaction)">Delete</button>
-    <hr>
+<div class="padding-s2" *ngIf="appService.transactions!.length > 0; else noItems">
+
+  <div class="expediture-card" *ngFor="let transaction of appService.transactions">
+    <div class="expediture-card-icon">
+      <img src="assets\icons\cart.png">
+    </div>
+
+    <div class="column">
+      <p>{{ transaction.comment }} </p>
+      <p>{{ transaction.date | date:'yyyy.MM.dd'}} {{ transaction.date | date:'HH:mm'}}</p>
+    </div>
+
+    <p> {{ transaction.amount }} </p>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu"  >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="deleteTransaction(transaction)" mat-menu-item>Delete</button>
+    </mat-menu>
   </div>
 
 </div>
