@@ -8,6 +8,16 @@
       <input matInput type="text" formControlName="comment">
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categorys" [value]="category.value">
+          {{category.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
     <div class="full-width mid">
       <app-keypad formControlName="amount"></app-keypad>
     </div>

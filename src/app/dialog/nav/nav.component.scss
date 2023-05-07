@@ -1,0 +1,20 @@
+@import "/src/assets/scss/variable.scss";
+
+.nav-sidenav-btn {
+    position: fixed;
+    top: 20px;
+    left: 300px;
+    transform: translateX(-50%); // Center a position:fixed element
+    color: white;
+    background-color: $primary-color;
+}
+
+h2 {
+    padding: 8px;
+    background-color: lightgrey;
+
+    &:hover {
+        cursor: pointer;
+        background-color: lightblue;
+    }
+}

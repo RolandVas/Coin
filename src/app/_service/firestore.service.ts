@@ -40,4 +40,8 @@ export class FirestoreService {
     .delete()
   }
 
+  getOneTransactionFromFirebase(id: string) {
+    return this.firestore.collection<TransactionOfMoney>(this.transactions).doc(id).valueChanges();
+  }
+
 }

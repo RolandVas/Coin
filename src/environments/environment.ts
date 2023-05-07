@@ -11,14 +11,6 @@ export const environment = {
     authDomain: 'coin-e468d.firebaseapp.com',
     messagingSenderId: '1025759633012',
   },
-  firebaseConfig: {
-    apiKey: "AIzaSyAk_YjYZIkTPWRKiWOHWZ_lPhfEOEVe_g8",
-    authDomain: "coin-e468d.firebaseapp.com",
-    projectId: "coin-e468d",
-    storageBucket: "coin-e468d.appspot.com",
-    messagingSenderId: "1025759633012",
-    appId: "1:1025759633012:web:524821c08df08ba57b7b21"
-  },
   production: false
 };
 

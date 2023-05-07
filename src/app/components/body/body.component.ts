@@ -3,6 +3,7 @@ import { TransactionOfMoney } from 'src/app/_interface/transaction';
 import { FirestoreService } from 'src/app/_service/firestore.service';
 import { AppService } from '../../_service/app.service'
 import { Subject, takeUntil } from 'rxjs'
+import { ExpeditureService } from 'src/app/_service/expediture.service';
 
 @Component({
   selector: 'app-body',
@@ -13,7 +14,9 @@ export class BodyComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>()
 
-  constructor(private firestore: FirestoreService, public appService: AppService) { }
+  constructor(private firestore: FirestoreService, 
+              public expeditureService: ExpeditureService,
+              public appService: AppService) { }
 
   ngOnInit(): void {
     this.firestore.getTransactionFromFirebase()
@@ -31,7 +34,6 @@ export class BodyComponent implements OnInit, OnDestroy {
   getTotalValue() {
     this.appService.totalAmount = 0
     for (const amount of this.appService.transactions) {
-      console.log(amount.amount)
       this.appService.totalAmount += +amount.amount
     }
     console.log(this.appService.totalAmount)

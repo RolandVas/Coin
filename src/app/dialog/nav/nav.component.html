@@ -1,0 +1,11 @@
+<div *ngIf="user$ | async as user">
+    <h1>Hello {{ user.displayName }}!</h1>
+    <h3>{{ user.email }}</h3>
+</div>
+
+<h2 (click)="navigateToCategory()">Category</h2>
+<h2 (click)="logout()">Logout</h2>
+
+<button class="nav-sidenav-btn" mat-fab color="" (click)="closSideNav()">
+    <mat-icon>close</mat-icon>
+</button>

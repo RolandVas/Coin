@@ -4,6 +4,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FirestoreService } from 'src/app/_service/firestore.service';
 import { TransactionOfMoney } from 'src/app/_interface/transaction';
 
+interface category {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-expenditure-dialog',
   templateUrl: './expenditure-dialog.component.html',
@@ -15,7 +20,14 @@ export class ExpenditureDialogComponent implements OnInit {
     comment: new FormControl(),
     amount: new FormControl('', Validators.required),
     date: new FormControl(),
+    category: new FormControl(),
   })
+
+  public categorys: category[] = [
+    {value: 'restaurant', viewValue: 'Restaurant'},
+    {value: 'shopping', viewValue: 'Shopping'},
+    {value: 'hobby', viewValue: 'Hobby'},
+  ]
 
   constructor(
     public dialogRef: MatDialogRef<ExpenditureDialogComponent>,

@@ -35,12 +35,16 @@ $coin-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+* {
+  margin: 0;
+}
+
 html, body {
   height: 100%;
+  margin: 0 !important;
 }
 
 body {
-  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -58,12 +62,7 @@ p {
 }
 
 .padding-s2 {
-  padding: 0 16px 0 16px;
-}
-
-mat-dialog-container {
-  height: 100vh !important;
-  width: 100vw !important;
+  padding: 0 16px 100px 16px;
 }
 
 .full-width {
@@ -72,7 +71,6 @@ mat-dialog-container {
 }
 
 .mid {
-  display: flex;
   justify-content: center;
 }
 

@@ -1,9 +1,9 @@
 .nummeric_keypaad {
-width: 450px;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
+  width: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .keypad_input {
@@ -13,14 +13,18 @@ flex-direction: column;
 }
 
 .number-btn {
+  padding: 8px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: lightgray;
   border-radius: 16px;
-}
 
+  p {
+    margin: 0;
+  }
+}
 
 .keypad {
   width: 100%;
@@ -28,8 +32,8 @@ flex-direction: column;
   p {
     vertical-align: middle;
   }
-  
-  &_container{
+
+  &_container {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
       "n1   n2   n3"
@@ -80,6 +84,11 @@ flex-direction: column;
     &-ndel {
       grid-area: ndel;
     }
+  }
+}
 
+@media (max-width: 450px) {
+  .nummeric_keypaad {
+    width: 100%;
   }
 }

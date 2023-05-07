@@ -1,10 +1,19 @@
 @import "/src/assets/scss/variable.scss";
 
-button {
+.dialog-btn {
     position: fixed;
     bottom: 24px;
     left: 50%;
     transform: translateX(-50%); // Center a position:fixed element
     color: white;
     background-color: $primary-color;
+}
+
+.sidenav-btn {
+    position: fixed;
+    top: 24px;
+    left: 40px;
+    transform: translateX(-50%); // Center a position:fixed element
+    color: $primary-color;
+    background-color: white;
 }

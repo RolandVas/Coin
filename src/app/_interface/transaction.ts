@@ -3,4 +3,5 @@ export interface TransactionOfMoney {
   amount: number
   id?: string
   date?: number
+  category?: string
 }

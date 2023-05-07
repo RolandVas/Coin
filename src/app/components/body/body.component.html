@@ -1,23 +1,20 @@
 <div class="padding-s2" *ngIf="appService.transactions!.length > 0; else noItems">
 
-  <div class="expediture-card" *ngFor="let transaction of appService.transactions">
+  <div class="expediture-card" *ngFor="let transaction of appService.transactions" [routerLink]="[transaction.id]">
     <div class="expediture-card-icon">
       <img src="assets\icons\cart.png">
+      <p>{{ transaction.category }}</p>
     </div>
 
-    <div class="column">
-      <p>{{ transaction.comment }} </p>
-      <p>{{ transaction.date | date:'yyyy.MM.dd'}} {{ transaction.date | date:'HH:mm'}}</p>
+    <div class="expediture-action">
+      <p> {{ transaction.amount }} Ft </p>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="deleteTransaction(transaction)" mat-menu-item>Delete</button>
+      </mat-menu>
     </div>
-
-    <p> {{ transaction.amount }} </p>
-
-    <button mat-icon-button [matMenuTriggerFor]="menu"  >
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button (click)="deleteTransaction(transaction)" mat-menu-item>Delete</button>
-    </mat-menu>
   </div>
 
 </div>

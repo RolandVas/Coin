@@ -1,0 +1,54 @@
+@import "/src/assets/scss/variable.scss";
+
+.expediture {
+    width: 100%;
+
+    &-head {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        width: 100%;
+        height: 100px;
+        background-color: $primary-color;
+        border-bottom-right-radius: 40px;
+        border-bottom-left-radius: 40px;
+    }
+
+    &-buttons {
+        width: 200px;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%); // Center a position:fixed element
+        
+        button {
+            background-color: $primary-color;
+            color: white;
+        }
+    }
+
+    &-body {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        &-date {
+            font-size: large;
+        }
+
+        &-category {
+            font-size: x-large;
+            margin-top: 30px;
+        }
+
+        &-amount {
+            font-size: 48px;
+            font-weight: 600;
+            margin-top: 50px;
+        }
+    }
+}
