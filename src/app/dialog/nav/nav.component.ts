@@ -15,8 +15,8 @@ export class NavComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<NavComponent>,
-    private router: Router, 
-    private authService: AuthService, 
+    private router: Router,
+    private authService: AuthService,
     private auth: AngularFireAuth) { }
 
   ngOnInit(): void {

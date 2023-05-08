@@ -1,6 +1,6 @@
 <div *ngIf="user$ | async as user">
-    <h1>Hello {{ user.displayName }}!</h1>
-    <h3>{{ user.email }}</h3>
+    <h1>Hello {{ user.displayName? user.displayName : 'No user' }}!</h1>
+    <h3>{{ user.email? user.email : 'No email' }}</h3>
 </div>
 
 <h2 (click)="navigateToCategory()">Category</h2>
