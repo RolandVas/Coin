@@ -1,3 +1,5 @@
+<app-nav></app-nav>
+
 <div class="padding-s2" *ngIf="appService.transactions!.length > 0; else noItems">
 
   <div class="expediture-card" *ngFor="let transaction of appService.transactions" [routerLink]="[transaction.id]">
@@ -25,3 +27,5 @@
 </ng-template>
 
 <app-add-expenditure></app-add-expenditure>
+
+<lib-lib></lib-lib>

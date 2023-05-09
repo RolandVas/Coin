@@ -11,10 +11,11 @@ import { AuthService } from 'src/app/_service/auth.service';
 })
 export class NavComponent implements OnInit {
 
+  isSideNavOpen = false;
+
   user$ = this.auth.user
 
   constructor(
-    public dialogRef: MatDialogRef<NavComponent>,
     private router: Router,
     private authService: AuthService,
     private auth: AngularFireAuth) { }
@@ -22,18 +23,28 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closSideNav() {
-    this.dialogRef.close();
+  navigateToHome() {
+    this.router.navigate(['']);
+    this.isSideNavOpen = false;
   }
+
+  toggleSideNav() {
+    this.isSideNavOpen = !this.isSideNavOpen;
+  }
+
+  closeSideNav() {
+    this.isSideNavOpen = false;
+  }
+
 
   navigateToCategory(){
     this.router.navigate(['category']);
-    this.dialogRef.close();
+    this.isSideNavOpen = false;
   }
 
   logout() {
     this.authService.logout()
-    this.dialogRef.close();
+    this.isSideNavOpen = false;
   }
 
 }

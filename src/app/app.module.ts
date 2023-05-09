@@ -33,6 +33,8 @@ import { SingUpComponent } from './auth/sing-up/sing-up.component';
 import { NavComponent } from './dialog/nav/nav.component';
 import { CategoryComponent } from './components/category/category.component'
 
+import { LibModule } from 'lib';
+
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { CategoryComponent } from './components/category/category.component'
   ],
   imports: [
     BrowserModule,
+    LibModule,
     RouterModule,
     MatSelectModule,
     MatMenuModule,

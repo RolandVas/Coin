@@ -37,10 +37,6 @@ const routes: Routes = [
 
   },
   {
-    path: 'ex/:id', component: ExpeditureComponent, 
-
-  },
-  {
     path: 'login', component: LoginComponent, 
 
   },
@@ -50,6 +46,10 @@ const routes: Routes = [
   },
   {
     path: 'category', component: CategoryComponent, 
+
+  },
+  {
+    path: ':id', component: ExpeditureComponent, 
 
   }
 ];

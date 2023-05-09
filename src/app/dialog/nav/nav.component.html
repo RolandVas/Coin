@@ -1,11 +1,29 @@
-<div *ngIf="user$ | async as user">
-    <h1>Hello {{ user.displayName? user.displayName : 'No user' }}!</h1>
-    <h3>{{ user.email? user.email : 'No email' }}</h3>
+<button class="side-nav-close" mat-fab color="" (click)="toggleSideNav()">
+    <mat-icon>view_headline</mat-icon>
+</button>
+
+<div [ngClass]="{'overlay': isSideNavOpen}" (click)="closeSideNav()"></div>
+
+<div class="side-nav" [ngClass]="{'open': isSideNavOpen}">
+    <button class="close-button" mat-fab (click)="closeSideNav()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+
+    <div class="nav-left">
+        <div *ngIf="user$ | async as user; else noUser">
+            <h1>Hello {{ user.displayName}}!</h1>
+            <h3>{{ user.email }}</h3>
+        </div>
+    </div>
+    <hr>
+    <ul>
+        <li (click)="navigateToHome()">Home</li>
+        <li (click)="navigateToCategory()">Category</li>
+        <li (click)="logout()">Logout</li>
+    </ul>
 </div>
 
-<h2 (click)="navigateToCategory()">Category</h2>
-<h2 (click)="logout()">Logout</h2>
-
-<button class="nav-sidenav-btn" mat-fab color="" (click)="closSideNav()">
-    <mat-icon>close</mat-icon>
-</button>
+<ng-template #noUser>
+    <h1>No user</h1>
+    <h3>No email</h3>
+</ng-template>
