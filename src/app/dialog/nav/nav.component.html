@@ -10,7 +10,7 @@
     </button>
 
     <div class="nav-left">
-        <div *ngIf="user$ | async as user; else noUser">
+        <div *ngIf="authService.userData as user; else noUser">
             <h1>Hello {{ user.displayName}}!</h1>
             <h3>{{ user.email }}</h3>
         </div>

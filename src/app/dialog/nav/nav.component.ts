@@ -13,12 +13,9 @@ export class NavComponent implements OnInit {
 
   isSideNavOpen = false;
 
-  user$ = this.auth.user
-
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private auth: AngularFireAuth) { }
+    public authService: AuthService) { }
 
   ngOnInit(): void {
   }

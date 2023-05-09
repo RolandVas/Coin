@@ -8,12 +8,36 @@ import { from } from 'rxjs';
 })
 export class AuthService {
 
+  userData: any;
+
   isAuthenticated: boolean | undefined;
 
-  constructor(private auth: AngularFireAuth, private router: Router) { }
+  currentUserID: string = ''
+
+  constructor(private auth: AngularFireAuth, private router: Router) {
+    this.auth.authState.subscribe((user) => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        const storedUser = localStorage.getItem('user');
+        if (storedUser !== null) {
+          JSON.parse(storedUser);
+        }
+      } else {
+        localStorage.setItem('user', '');
+        const storedUser = localStorage.getItem('user');
+        if (storedUser !== null) {
+          JSON.parse(storedUser);
+        }
+      }
+    });
+
+    console.log(this.userData)
+  }
 
   login(email: string, password: string) {
-    return from(this.auth.signInWithEmailAndPassword(email, password)).subscribe(()=>{
+    return from(this.auth.signInWithEmailAndPassword(email, password)).subscribe((user: any)=>{
+      this.currentUserID = user.user.uid
       this.isAuthenticated = true;
       this.router.navigate([''])
     })
