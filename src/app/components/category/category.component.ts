@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryComponent implements OnInit {
 
+  public categorys: any = [
+    {value: 'restaurant', label: 'Restaurant', img: ''},
+    {value: 'shopping', label: 'Shopping', img: ''},
+    {value: 'hobby', label: 'Hobby', img: ''},
+  ]
+
   constructor() { }
 
   ngOnInit(): void {

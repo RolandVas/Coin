@@ -1,0 +1,40 @@
+@import "/src/assets/scss/variable.scss";
+
+.category-body {
+  padding: 8px;
+}
+
+.category-head {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100px;
+  background-color: $primary-color;
+  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+
+.category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px;
+  height: 50px;
+  width: 50px;
+  padding: 8px;
+  border-radius: 100%;
+
+  p {
+    margin: 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: lightgray;
+  }
+}
+
+.category-icons {
+  display: flex;
+}

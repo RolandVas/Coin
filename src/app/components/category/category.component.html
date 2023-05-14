@@ -1,1 +1,20 @@
 <app-nav></app-nav>
+
+<div class="category-head">
+  <h2>Category</h2>
+</div>
+
+<div class="category-body">
+
+  <mat-form-field class="full-width">
+    <mat-label>Category</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+
+  <div class="category-icons">
+    <div *ngFor="let category of categorys" class="category-icon">
+      <img src="{{ category.img }}">
+      <p>{{ category.label }}</p>
+    </div>
+  </div>
+</div>
