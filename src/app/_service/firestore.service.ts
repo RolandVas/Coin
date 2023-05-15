@@ -1,3 +1,4 @@
+import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { TransactionOfMoney } from '../_interface/transaction';
@@ -35,9 +36,10 @@ export class FirestoreService {
   }
 
   getTransactionFromFirebase() {
+    let user = this.authService.getCurrentUser()
     return this.firestore
       .collection('users')
-      .doc(this.authService.userData.uid)
+      .doc(user.uid)
       .collection<TransactionOfMoney>(this.transactions)
       .valueChanges();
   }

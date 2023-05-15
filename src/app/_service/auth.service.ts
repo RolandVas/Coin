@@ -22,6 +22,7 @@ export class AuthService {
         const storedUser = localStorage.getItem('user');
         if (storedUser !== null) {
           JSON.parse(storedUser);
+          this.userData = JSON.parse(storedUser);
         }
       } else {
         localStorage.setItem('user', '');
@@ -31,8 +32,20 @@ export class AuthService {
         }
       }
     });
+  }
 
+  getCurrentUser(): any {
+    let user
+    let text = localStorage.getItem("user");
+    if (text) {
+      user = JSON.parse(text);
+    }
+    return user
+  }
+
+  logUser() {
     console.log(this.userData)
+    console.log(this.currentUserID)
   }
 
   login(email: string, password: string) {
