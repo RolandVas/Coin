@@ -8,11 +8,15 @@
 
   <mat-form-field class="full-width">
     <mat-label>Category</mat-label>
-    <input matInput type="text">
+    <input matInput type="text" [(ngModel)]="category">
   </mat-form-field>
 
+  <button (click)="addCategory()">Add Category</button>
+  <button *ngIf="editBTN" (click)="update()">Update</button>
+  <button *ngIf="editBTN" (click)="delete()">Delete</button>
+
   <div class="category-icons">
-    <div *ngFor="let category of categorys" class="category-icon">
+    <div *ngFor="let category of categorys" class="category-icon" (click)="editCategory(category)">
       <img src="{{ category.img }}">
       <p>{{ category.label }}</p>
     </div>
