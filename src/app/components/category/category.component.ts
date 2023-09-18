@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Categorys } from 'src/app/_interface/category';
+import { FirestoreService } from 'src/app/_service/firestore.service';
 
 @Component({
   selector: 'app-category',
@@ -7,15 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryComponent implements OnInit {
 
-  public categorys: any = [
-    {value: 'restaurant', label: 'Restaurant', img: ''},
-    {value: 'shopping', label: 'Shopping', img: ''},
-    {value: 'hobby', label: 'Hobby', img: ''},
-  ]
+  public categoryLabel: string = ''
+  public category: Categorys = {}
+  public categorysFormFirebase: Categorys[] | undefined
 
-  constructor() { }
+  constructor(private firestore: FirestoreService) { }
 
   ngOnInit(): void {
+    this.firestore.getTransactionFromFirebase('categorys').subscribe((category: Categorys[]) => 
+    this.categorysFormFirebase = category
+    )
+  }
+
+  updateInputValue() {
+    this.category.label = this.categoryLabel
+    this.firestore.saveTransactionOnFirebase(this.category, 'categorys')
+    this.categoryLabel = ''
+  }
+
+  select(icon: string) {
+    
   }
 
 }

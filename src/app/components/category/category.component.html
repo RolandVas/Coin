@@ -8,12 +8,20 @@
 
   <mat-form-field class="full-width">
     <mat-label>Category</mat-label>
-    <input matInput type="text">
+    <input matInput type="text" [(ngModel)]="categoryLabel">
   </mat-form-field>
+  <div class="category-icon-list">
+    <mat-icon (click)="select('start')">star</mat-icon>
+    <mat-icon>add</mat-icon>
+    <mat-icon>movie</mat-icon>
+    <mat-icon>airplanemode_active</mat-icon>
+  </div>
+
+  <button (click)="updateInputValue()">Add</button>
 
   <div class="category-icons">
-    <div *ngFor="let category of categorys" class="category-icon">
-      <img src="{{ category.img }}">
+    <div *ngFor="let category of categorysFormFirebase" class="category-icon">
+      <!-- <img src="{{ category.img }}"> -->
       <p>{{ category.label }}</p>
     </div>
   </div>

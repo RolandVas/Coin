@@ -1,6 +1,5 @@
-import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import { TransactionOfMoney } from '../_interface/transaction';
 import { AuthService } from './auth.service'
 
@@ -10,19 +9,19 @@ import { AuthService } from './auth.service'
 export class FirestoreService {
 
   transactions: string = 'transactions'
+  categorys: string = 'categorys'
 
   constructor(private firestore: AngularFirestore, private authService: AuthService) {
    }
 
-  saveTransactionOnFirebase(transaction: TransactionOfMoney) {
+  saveTransactionOnFirebase(transaction: any, category: string) {
     this.firestore
     .collection('users')
       .doc(this.authService.userData.uid)
-      .collection(this.transactions)
+      .collection(category)
     .add(transaction)
     .then( (doc: any) => {
-      this.updateDocWithId(doc.id)
-      console.log('save data on Firebase')
+      // this.updateDocWithId(doc.id)
     });
   }
 
@@ -35,12 +34,12 @@ export class FirestoreService {
       .update({ id: id })
   }
 
-  getTransactionFromFirebase() {
+  getTransactionFromFirebase(value: string) {
     let user = this.authService.getCurrentUser()
     return this.firestore
       .collection('users')
       .doc(user.uid)
-      .collection<TransactionOfMoney>(this.transactions)
+      .collection<any>(value)
       .valueChanges();
   }
 

@@ -19,7 +19,7 @@ export class BodyComponent implements OnInit, OnDestroy {
               public appService: AppService) { }
 
   ngOnInit(): void {
-    this.firestore.getTransactionFromFirebase()
+    this.firestore.getTransactionFromFirebase('transactions')
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((data: TransactionOfMoney[]) => {
       this.appService.transactions = data
@@ -36,7 +36,6 @@ export class BodyComponent implements OnInit, OnDestroy {
     for (const amount of this.appService.transactions) {
       this.appService.totalAmount += +amount.amount
     }
-    console.log(this.appService.totalAmount)
   }
 
   public ngOnDestroy(): void {

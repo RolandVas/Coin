@@ -59,11 +59,9 @@ export class AuthService {
   signup(userName: string, email: string, password: string) {
     return this.auth.createUserWithEmailAndPassword(email, password).then( user => {
       this.router.navigate([''])
-      console.log('save user: ', this.auth)
       user.user?.updateProfile({
         displayName: userName,
       })
-      // this.saveUserInFirabase()
     })
   }
 

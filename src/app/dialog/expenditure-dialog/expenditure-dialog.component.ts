@@ -3,11 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FirestoreService } from 'src/app/_service/firestore.service';
 import { TransactionOfMoney } from 'src/app/_interface/transaction';
-
-interface category {
-  value: string;
-  viewValue: string;
-}
+import { Categorys } from 'src/app/_interface/category';
 
 @Component({
   selector: 'app-expenditure-dialog',
@@ -15,19 +11,14 @@ interface category {
   styleUrls: ['./expenditure-dialog.component.scss']
 })
 export class ExpenditureDialogComponent implements OnInit {
+  public categorysFormFirebase: Categorys[] | undefined
 
   expeditureForm: FormGroup = new FormGroup ({
     comment: new FormControl(),
     amount: new FormControl('', Validators.required),
     date: new FormControl(),
-    category: new FormControl(),
+    category: new FormControl('', Validators.required),
   })
-
-  public categorys: category[] = [
-    {value: 'restaurant', viewValue: 'Restaurant'},
-    {value: 'shopping', viewValue: 'Shopping'},
-    {value: 'hobby', viewValue: 'Hobby'},
-  ]
 
   constructor(
     public dialogRef: MatDialogRef<ExpenditureDialogComponent>,
@@ -36,6 +27,9 @@ export class ExpenditureDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.appService.getTransactionFromFirebase('categorys').subscribe((category: Categorys[]) => 
+    this.categorysFormFirebase = category
+    )
   }
 
   onNoClick(): void {
@@ -47,7 +41,7 @@ export class ExpenditureDialogComponent implements OnInit {
     this.expeditureForm.controls['date'].setValue(date)
     console.log(this.expeditureForm)
     const transaction: TransactionOfMoney = this.expeditureForm.value
-    this.appService.saveTransactionOnFirebase(transaction)
+    this.appService.saveTransactionOnFirebase(transaction, 'transactions')
     console.log('expeditureForm submitted')
     this.dialogRef.close();
   }

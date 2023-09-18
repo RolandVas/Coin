@@ -11,8 +11,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Category</mat-label>
       <mat-select formControlName="category">
-        <mat-option *ngFor="let category of categorys" [value]="category.value">
-          {{category.viewValue}}
+        <mat-option *ngFor="let category of categorysFormFirebase" [value]="category.label">
+          {{category.label}}
         </mat-option>
       </mat-select>
     </mat-form-field>
