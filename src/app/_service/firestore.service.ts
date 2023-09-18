@@ -4,7 +4,7 @@ import { TransactionOfMoney } from '../_interface/transaction';
 import { AuthService } from './auth.service'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirestoreService {
 
@@ -12,11 +12,11 @@ export class FirestoreService {
   categorys: string = 'categorys'
 
   constructor(private firestore: AngularFirestore, private authService: AuthService) {
-   }
+  }
 
   saveTransactionOnFirebase(transaction: any, category: string) {
     this.firestore
-    .collection('users')
+      .collection('users')
       .doc(this.authService.userData.uid)
       .collection(category)
     .add(transaction)
@@ -48,8 +48,8 @@ export class FirestoreService {
       .collection('users')
       .doc(this.authService.userData.uid)
       .collection<TransactionOfMoney>(this.transactions)
-    .doc(transaction.id)
-    .delete()
+      .doc(transaction.id)
+      .delete()
   }
 
   getOneTransactionFromFirebase(id: string) {
@@ -58,7 +58,7 @@ export class FirestoreService {
       .doc(this.authService.userData.uid)
       .collection<TransactionOfMoney>(this.transactions)
       .doc(id)
-      .valueChanges();
+      .valueChanges()
   }
 
 }
