@@ -4,6 +4,7 @@ import { FirestoreService } from 'src/app/_service/firestore.service';
 import { AppService } from '../../_service/app.service'
 import { Subject, takeUntil } from 'rxjs'
 import { ExpeditureService } from 'src/app/_service/expediture.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-body',
@@ -16,6 +17,7 @@ export class BodyComponent implements OnInit, OnDestroy {
 
   constructor(private firestore: FirestoreService, 
               public expeditureService: ExpeditureService,
+              private router: Router,
               public appService: AppService) { }
 
   ngOnInit(): void {
@@ -41,6 +43,10 @@ export class BodyComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.unsubscribe$.next()
     this.unsubscribe$.complete()
+  }
+
+  public navigate(id?: string) {
+    this.router.navigate([id])
   }
 
 }

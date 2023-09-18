@@ -1,7 +1,6 @@
 <app-nav></app-nav>
 
 <div class="padding-s2" *ngIf="appService.transactions!.length > 0; else noItems">
-<!--  [routerLink]="[transaction.id]"-->
   <div class="expediture-card" *ngFor="let transaction of appService.transactions">
     <div class="expediture-card-icon">
       <img src="assets\icons\cart.png">
@@ -15,6 +14,7 @@
       </button>
       <mat-menu #menu="matMenu">
         <button (click)="deleteTransaction(transaction)" mat-menu-item>Delete</button>
+        <button (click)="navigate(transaction.id)" mat-menu-item>Details</button>
       </mat-menu>
     </div>
   </div>

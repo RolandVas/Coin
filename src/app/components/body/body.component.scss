@@ -8,11 +8,6 @@
   border-radius: 10px;
   margin-top: 16px;
 
-  &:hover {
-    cursor: pointer;
-    background-color: lightblue
-  }
-
   &-icon {
     display: flex;
     justify-content: center;
@@ -40,6 +35,10 @@
 
 .expediture-action {
   display: flex;
+
+  button {
+    z-index: 99;
+  }
 
   p {
     font-size: 20px;

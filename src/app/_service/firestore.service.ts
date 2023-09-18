@@ -21,15 +21,15 @@ export class FirestoreService {
       .collection(category)
     .add(transaction)
     .then( (doc: any) => {
-      // this.updateDocWithId(doc.id)
+      this.updateDocWithId(doc.id, transaction, category)
     });
   }
 
-  updateDocWithId(id: any) {
+  updateDocWithId(id: string, transaction: string, category: string) {
     this.firestore
       .collection('users')
       .doc(this.authService.userData.uid)
-      .collection(this.transactions)
+      .collection(category)
       .doc(id)
       .update({ id: id })
   }
