@@ -42,10 +42,12 @@
 .category-icon-list {
   display: flex;
 
-  mat-icon {
-    margin-right: 16px;
-    cursor: pointer;
+  img{
+    margin: 8px;
     padding: 8px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
 
     &:hover {
       background-color: antiquewhite;

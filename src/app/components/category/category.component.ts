@@ -8,6 +8,21 @@ import { FirestoreService } from 'src/app/_service/firestore.service';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+  imageSources: string[] = [
+    'assets/icons/cart.png',
+    'assets/icons/art.png',
+    'assets/icons/bike.png',
+    'assets/icons/car.png',
+    'assets/icons/hobby.png',
+    'assets/icons/hobby_1.png',
+    'assets/icons/home.png',
+    'assets/icons/internet.png',
+    'assets/icons/pet.png',
+    'assets/icons/shop.png',
+    'assets/icons/tv.png',
+    'assets/icons/vehicle.png',
+    'assets/icons/watering-can.png',
+  ];
 
   public categoryLabel: string = ''
   public category: Categorys = {}
@@ -27,8 +42,8 @@ export class CategoryComponent implements OnInit {
     this.categoryLabel = ''
   }
 
-  select(icon: string) {
-    
+  select(imgPath: string) {
+    this.category.img = imgPath
   }
 
 

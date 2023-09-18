@@ -34,6 +34,15 @@ export class FirestoreService {
       .update({ id: id })
   }
 
+  updateDoc(category: string, transaction: any, categoryObject: any) {
+    this.firestore
+      .collection('users')
+      .doc(this.authService.userData.uid)
+      .collection(category)
+      .doc(transaction)
+      .update({ category: categoryObject })
+  }
+
   getTransactionFromFirebase(value: string) {
     let user = this.authService.getCurrentUser()
     return this.firestore

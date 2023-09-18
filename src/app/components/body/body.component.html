@@ -3,8 +3,8 @@
 <div class="padding-s2" *ngIf="appService.transactions!.length > 0; else noItems">
   <div class="expediture-card" *ngFor="let transaction of appService.transactions">
     <div class="expediture-card-icon">
-      <img src="assets\icons\cart.png">
-      <p>{{ transaction.category }}</p>
+      <img [src]='transaction.category!.img'>
+      <p>{{ transaction.category!.label }}</p>
     </div>
 
     <div class="expediture-action">

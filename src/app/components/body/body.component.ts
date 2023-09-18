@@ -5,6 +5,7 @@ import { AppService } from '../../_service/app.service'
 import { Subject, takeUntil } from 'rxjs'
 import { ExpeditureService } from 'src/app/_service/expediture.service';
 import { Router } from '@angular/router';
+import { Categorys } from 'src/app/_interface/category';
 
 @Component({
   selector: 'app-body',

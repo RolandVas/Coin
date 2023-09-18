@@ -11,10 +11,9 @@
     <input matInput type="text" [(ngModel)]="categoryLabel">
   </mat-form-field>
   <div class="category-icon-list">
-    <mat-icon (click)="select('start')">star</mat-icon>
-    <mat-icon>add</mat-icon>
-    <mat-icon>movie</mat-icon>
-    <mat-icon>airplanemode_active</mat-icon>
+    <ng-container *ngFor="let source of imageSources">
+      <img [src]="source" (click)="select(source)">
+    </ng-container>
   </div>
 
   <button (click)="updateInputValue()">Add</button>
