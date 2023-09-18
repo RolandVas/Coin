@@ -11,47 +11,52 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectAuthorizedToHome = () => redirectLoggedInTo(['']);
 
 const routes: Routes = [
-/*   {
+   {
     path: '', component: HomeComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
-  },
-  {
-    path: ':id', component: ExpeditureComponent, 
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin }
-  },
-  {
-    path: 'login', component: LoginComponent, 
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectAuthorizedToHome }
-  },
-  {
-    path: 'signup', component: SingUpComponent, 
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectAuthorizedToHome }
-  }, */
-
-  {
-    path: '', component: HomeComponent,
-
-  },
-  {
-    path: 'login', component: LoginComponent, 
-
-  },
-  {
-    path: 'signup', component: SingUpComponent, 
-
   },
   {
     path: 'category', component: CategoryComponent, 
-
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
+    path: 'login', component: LoginComponent, 
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectAuthorizedToHome }
+  },
+  {
+    path: 'signup', component: SingUpComponent, 
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectAuthorizedToHome }
+  }, 
+  {
     path: ':id', component: ExpeditureComponent, 
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
 
-  }
+  // {
+  //   path: '', component: HomeComponent,
+
+  // },
+  // {
+  //   path: 'login', component: LoginComponent, 
+
+  // },
+  // {
+  //   path: 'signup', component: SingUpComponent, 
+
+  // },
+  // {
+  //   path: 'category', component: CategoryComponent, 
+
+  // },
+  // {
+  //   path: ':id', component: ExpeditureComponent, 
+
+  // }
 ];
 
 @NgModule({
