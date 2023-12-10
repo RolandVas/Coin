@@ -5,7 +5,7 @@
 
     <div class="expediture-body">
         <p class="expediture-body-date">{{ transaction?.date | date:'yyyy.MM.dd' }}</p>
-        <p class="expediture-body-category">{{ transaction?.category }}</p>
+        <p class="expediture-body-category">{{ transaction?.category?.label }}</p>
         <p class="expediture-body-amount">{{ transaction?.amount }} Ft</p>
     </div>
 

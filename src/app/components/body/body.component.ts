@@ -5,7 +5,6 @@ import { AppService } from '../../_service/app.service'
 import { Subject, takeUntil } from 'rxjs'
 import { ExpeditureService } from 'src/app/_service/expediture.service';
 import { Router } from '@angular/router';
-import { Categorys } from 'src/app/_interface/category';
 
 @Component({
   selector: 'app-body',
@@ -13,41 +12,54 @@ import { Categorys } from 'src/app/_interface/category';
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent implements OnInit, OnDestroy {
+  private unsubscribe$ = new Subject<void>();
 
-  private unsubscribe$ = new Subject<void>()
+  public transactions: TransactionOfMoney[] = [];
 
-  constructor(private firestore: FirestoreService, 
-              public expeditureService: ExpeditureService,
-              private router: Router,
-              public appService: AppService) { }
+  public groupedTransactions: { [key: string]: TransactionOfMoney[] } = {};
+
+  constructor(
+    private firestore: FirestoreService,
+    public expeditureService: ExpeditureService,
+    private router: Router,
+    public appService: AppService
+  ) {}
 
   ngOnInit(): void {
-    this.firestore.getTransactionFromFirebase('transactions')
+    this.firestore.getSortedTransactionFromFirebase('transactions')
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((data: TransactionOfMoney[]) => {
-      this.appService.transactions = data
-      this.getTotalValue()
-    })
+        this.transactions = data
+        this.groupedTransactions = this.appService.groupTransactionsByDate(this.transactions);
+        this.getTotalValue();
+      });
+  }
+
+  getGroupedTransactionKeys(): string[] {
+    return Object.keys(this.groupedTransactions);
   }
 
   deleteTransaction(transaction: TransactionOfMoney) {
-    this.firestore.deleteTransactionFromFirebase(transaction)
+    this.firestore.deleteTransactionFromFirebase(transaction);
   }
 
   getTotalValue() {
-    this.appService.totalAmount = 0
+    this.appService.totalAmount = 0;
     for (const amount of this.appService.transactions) {
-      this.appService.totalAmount += +amount.amount
+      this.appService.totalAmount += +amount.amount;
     }
   }
 
-  public ngOnDestroy(): void {
-    this.unsubscribe$.next()
-    this.unsubscribe$.complete()
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
-  public navigate(id?: string) {
-    this.router.navigate([id])
+  navigate(id?: string) {
+    this.router.navigate([id]);
   }
 
+  sortTransactionsByDate(transactions: TransactionOfMoney[]): TransactionOfMoney[] {
+    return transactions.sort((a, b) => (b.date || 0) - (a.date || 0));
+  }
 }

@@ -1,25 +1,35 @@
 <app-nav></app-nav>
 
-<div class="padding-s2" *ngIf="appService.transactions!.length > 0; else noItems">
-  <div class="expediture-card" *ngFor="let transaction of appService.transactions">
-    <div class="expediture-card-icon">
-      <img [src]='transaction.category!.img'>
-      <p>{{ transaction.category!.label }}</p>
-    </div>
+<!-- <div *ngFor="let dateKey of getGroupedTransactionKeys()">
+  <h2>{{ dateKey }}</h2>
+  <div *ngFor="let transaction of groupedTransactions[dateKey]">
+    <p>{{ transaction.amount }} Ft - {{ transaction.category?.label }}</p>
+  </div>
+</div> -->
 
-    <div class="expediture-action">
-      <p> {{ transaction.amount }} Ft </p>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button (click)="deleteTransaction(transaction)" mat-menu-item>Delete</button>
-        <button (click)="navigate(transaction.id)" mat-menu-item>Details</button>
-      </mat-menu>
+
+<!-- <div class="padding-s2" *ngIf="appService.transactions!.length > 0; else noItems"> -->
+  <div *ngFor="let dateKey of getGroupedTransactionKeys()">
+    <h2>{{ dateKey | date:'yyyy.MM.dd' }}</h2>
+    <div class="expediture-card" *ngFor="let transaction of groupedTransactions[dateKey]">
+      <div class="expediture-card-icon">
+        <img [src]='transaction.category!.img'>
+        <p>{{ transaction.category!.label }}</p>
+      </div>
+  
+      <div class="expediture-action">
+        <p> {{ transaction.amount }} Ft </p>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button (click)="deleteTransaction(transaction)" mat-menu-item>Delete</button>
+          <button (click)="navigate(transaction.id)" mat-menu-item>Details</button>
+        </mat-menu>
+      </div>
     </div>
   </div>
-
-</div>
+<!-- </div> -->
 
 <ng-template #noItems>
   <h3>There are no items of list</h3>

@@ -8,20 +8,19 @@ import { FirestoreService } from 'src/app/_service/firestore.service';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  imageSources: string[] = [
-    'assets/icons/cart.png',
-    'assets/icons/art.png',
-    'assets/icons/bike.png',
-    'assets/icons/car.png',
-    'assets/icons/hobby.png',
-    'assets/icons/hobby_1.png',
-    'assets/icons/home.png',
-    'assets/icons/internet.png',
-    'assets/icons/pet.png',
-    'assets/icons/shop.png',
-    'assets/icons/tv.png',
-    'assets/icons/vehicle.png',
-    'assets/icons/watering-can.png',
+  imageSources = [
+    {path: 'assets/icons/cart.png', selected: false},
+    {path: 'assets/icons/bike.png', selected: false},
+    {path: 'assets/icons/car.png', selected: false},
+    {path: 'assets/icons/hobby.png', selected: false},
+    {path: 'assets/icons/hobby_1.png', selected: false},
+    {path: 'assets/icons/home.png', selected: false},
+    {path: 'assets/icons/internet.png', selected: false},
+    {path: 'assets/icons/pet.png', selected: false},
+    {path: 'assets/icons/shop.png', selected: false},
+    {path: 'assets/icons/tv.png', selected: false},
+    {path: 'assets/icons/vehicle.png', selected: false},
+    {path: 'assets/icons/watering-can.png', selected: false},
   ];
 
   public categoryLabel: string = ''
@@ -40,10 +39,17 @@ export class CategoryComponent implements OnInit {
     this.category.label = this.categoryLabel
     this.firestore.saveTransactionOnFirebase(this.category, 'categorys')
     this.categoryLabel = ''
+    this.imageSources.forEach(img => img.selected = false);
   }
 
   select(imgPath: string) {
+    this.imageSources.forEach(img => img.selected = false);
     this.category.img = imgPath
+
+    const selectedImage = this.imageSources.find(img => img.path === imgPath);
+    if (selectedImage) {
+      selectedImage.selected = true;
+    }
   }
 
 

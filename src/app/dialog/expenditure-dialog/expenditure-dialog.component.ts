@@ -39,10 +39,8 @@ export class ExpenditureDialogComponent implements OnInit {
   onSubmit() {
     const date: any = Date.now()
     this.expeditureForm.controls['date'].setValue(date)
-    console.log(this.expeditureForm)
     const transaction: TransactionOfMoney = this.expeditureForm.value
     this.appService.saveTransactionOnFirebase(transaction, 'transactions')
-    console.log('expeditureForm submitted')
     this.dialogRef.close();
   }
 

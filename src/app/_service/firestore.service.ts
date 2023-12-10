@@ -18,7 +18,7 @@ export class FirestoreService {
     this.firestore
       .collection('users')
       .doc(this.authService.userData.uid)
-      .collection(category)
+      .collection(category, ref => ref.orderBy('date', 'desc'))
     .add(transaction)
     .then( (doc: any) => {
       this.updateDocWithId(doc.id, transaction, category)
@@ -49,6 +49,15 @@ export class FirestoreService {
       .collection('users')
       .doc(user.uid)
       .collection<any>(value)
+      .valueChanges();
+  }
+
+  getSortedTransactionFromFirebase(value: string) {
+    let user = this.authService.getCurrentUser()
+    return this.firestore
+      .collection('users')
+      .doc(user.uid)
+      .collection<any>(value, ref => ref.orderBy('date', 'desc'))
       .valueChanges();
   }
 
