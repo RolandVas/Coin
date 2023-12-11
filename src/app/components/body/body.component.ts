@@ -14,10 +14,6 @@ import { Router } from '@angular/router';
 export class BodyComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
-  public transactions: TransactionOfMoney[] = [];
-
-  public groupedTransactions: { [key: string]: TransactionOfMoney[] } = {};
-
   constructor(
     private firestore: FirestoreService,
     public expeditureService: ExpeditureService,
@@ -29,25 +25,17 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.firestore.getSortedTransactionFromFirebase('transactions')
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((data: TransactionOfMoney[]) => {
-        this.transactions = data
-        this.groupedTransactions = this.appService.groupTransactionsByDate(this.transactions);
-        this.getTotalValue();
+        this.appService.groupedTransactions = this.appService.groupTransactionsByDate(data);
+        this.appService.getTotalValue();
       });
   }
 
   getGroupedTransactionKeys(): string[] {
-    return Object.keys(this.groupedTransactions);
+    return Object.keys(this.appService.groupedTransactions);
   }
 
   deleteTransaction(transaction: TransactionOfMoney) {
     this.firestore.deleteTransactionFromFirebase(transaction);
-  }
-
-  getTotalValue() {
-    this.appService.totalAmount = 0;
-    for (const amount of this.appService.transactions) {
-      this.appService.totalAmount += +amount.amount;
-    }
   }
 
   ngOnDestroy(): void {
@@ -57,9 +45,5 @@ export class BodyComponent implements OnInit, OnDestroy {
 
   navigate(id?: string) {
     this.router.navigate([id]);
-  }
-
-  sortTransactionsByDate(transactions: TransactionOfMoney[]): TransactionOfMoney[] {
-    return transactions.sort((a, b) => (b.date || 0) - (a.date || 0));
   }
 }

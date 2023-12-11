@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { TransactionOfMoney } from '../_interface/transaction'
 
+interface GroupedTransactions {
+  [key: string]: TransactionOfMoney[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +12,7 @@ export class AppService {
 
   public totalAmount: number = 0
 
-  public transactions: TransactionOfMoney[] = []
+  public groupedTransactions: { [key: string]: TransactionOfMoney[] } = {};
 
   constructor() {
   }
@@ -32,5 +36,24 @@ export class AppService {
     return groupedTransactions;
   }
 
+  getTotalValue() {
+    console.log('Gesamtsumme für', this.calculateTotalAmount(this.groupedTransactions));
+  } 
+
+  calculateTotalAmount(data: GroupedTransactions | TransactionOfMoney[]): number {
+    if (Array.isArray(data)) {
+      // Wenn es sich um ein Array von Transaktionen handelt
+      return data.reduce((sum, transaction) => +sum + +transaction.amount, 0);
+    } else {
+      // Wenn es sich um ein Objekt von gruppierten Transaktionen handelt
+      let totalAmount = 0;
+      for (const dateKey in data) {
+        if (data.hasOwnProperty(dateKey)) {
+          totalAmount += this.calculateTotalAmount(data[dateKey]);
+        }
+      }
+      return totalAmount;
+    }
+  }
 
 }

@@ -8,10 +8,10 @@
 </div> -->
 
 
-<!-- <div class="padding-s2" *ngIf="appService.transactions!.length > 0; else noItems"> -->
+<div class="padding-s2" *ngIf="appService.groupedTransactions; else noItems">
   <div *ngFor="let dateKey of getGroupedTransactionKeys()">
     <h2>{{ dateKey | date:'yyyy.MM.dd' }}</h2>
-    <div class="expediture-card" *ngFor="let transaction of groupedTransactions[dateKey]">
+    <div class="expediture-card" *ngFor="let transaction of appService.groupedTransactions[dateKey]">
       <div class="expediture-card-icon">
         <img [src]='transaction.category!.img'>
         <p>{{ transaction.category!.label }}</p>
@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-<!-- </div> -->
+</div>
 
 <ng-template #noItems>
   <h3>There are no items of list</h3>
