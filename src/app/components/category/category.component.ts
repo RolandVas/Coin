@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Categorys } from 'src/app/_interface/category';
 import { FirestoreService } from 'src/app/_service/firestore.service';
+import { ExpenditureDialogComponent } from '../../dialog/expenditure-dialog/expenditure-dialog.component'
+import { MatDialog, MatDialogRef } from '@angular/material/dialog'
+import { EditCategoryComponent } from '../../dialog/edit-category/edit-category.component'
 
 @Component({
   selector: 'app-category',
@@ -27,10 +30,10 @@ export class CategoryComponent implements OnInit {
   public category: Categorys = {}
   public categorysFormFirebase: Categorys[] | undefined
 
-  constructor(private firestore: FirestoreService) { }
+  constructor(private firestore: FirestoreService, public dialog: MatDialog, public dialogRef: MatDialogRef<EditCategoryComponent>) { }
 
   ngOnInit(): void {
-    this.firestore.getTransactionFromFirebase('categorys').subscribe((category: Categorys[]) => 
+    this.firestore.getTransactionFromFirebase('categorys').subscribe((category: Categorys[]) =>
     this.categorysFormFirebase = category
     )
   }
@@ -52,6 +55,20 @@ export class CategoryComponent implements OnInit {
     }
   }
 
+  editCategory(category: Categorys) {
+    this.dialog.open(EditCategoryComponent, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'full-screen-modal',
+      data: category
+    })
 
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      // this.animal = result;
+    });
+  }
 
 }

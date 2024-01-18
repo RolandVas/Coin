@@ -31,7 +31,8 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { SingUpComponent } from './auth/sing-up/sing-up.component';
 import { NavComponent } from './dialog/nav/nav.component';
-import { CategoryComponent } from './components/category/category.component'
+import { CategoryComponent } from './components/category/category.component';
+import { EditCategoryComponent } from './dialog/edit-category/edit-category.component'
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { CategoryComponent } from './components/category/category.component'
     SingUpComponent,
     NavComponent,
     CategoryComponent,
+    EditCategoryComponent,
   ],
   imports: [
     BrowserModule,

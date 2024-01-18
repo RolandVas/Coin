@@ -5,7 +5,7 @@
   <div *ngFor="let transaction of groupedTransactions[dateKey]">
     <p>{{ transaction.amount }} Ft - {{ transaction.category?.label }}</p>
   </div>
-</div> -->
+</div> -->3
 
 
 <div class="padding-s2" *ngIf="appService.groupedTransactions; else noItems">
@@ -16,7 +16,7 @@
         <img [src]='transaction.category!.img'>
         <p>{{ transaction.category!.label }}</p>
       </div>
-  
+
       <div class="expediture-action">
         <p> {{ transaction.amount }} Ft </p>
         <button mat-icon-button [matMenuTriggerFor]="menu">

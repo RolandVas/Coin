@@ -23,7 +23,7 @@
   </div>
 
   <div class="category-icons">
-    <div *ngFor="let category of categorysFormFirebase" class="category-icon">
+    <div *ngFor="let category of categorysFormFirebase" (click)="editCategory(category)" class="category-icon">
       <img src="{{ category.img }}">
       <p>{{ category.label }}</p>
     </div>
