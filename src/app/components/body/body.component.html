@@ -5,7 +5,7 @@
   <div *ngFor="let transaction of groupedTransactions[dateKey]">
     <p>{{ transaction.amount }} Ft - {{ transaction.category?.label }}</p>
   </div>
-</div> -->3
+</div> -->
 
 
 <div class="padding-s2" *ngIf="appService.groupedTransactions; else noItems">

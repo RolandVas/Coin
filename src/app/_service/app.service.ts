@@ -37,7 +37,7 @@ export class AppService {
   }
 
   getTotalValue() {
-    console.log('Gesamtsumme für', this.calculateTotalAmount(this.groupedTransactions));
+    this.totalAmount = this.calculateTotalAmount(this.groupedTransactions)
   } 
 
   calculateTotalAmount(data: GroupedTransactions | TransactionOfMoney[]): number {

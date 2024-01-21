@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { Auth, authState, updateProfile } from '@angular/fire/auth'
 import { AngularFireAuth } from '@angular/fire/compat/auth'
 import { Router } from '@angular/router'
 import { from } from 'rxjs'
@@ -12,10 +13,12 @@ export class AuthService {
 
   isAuthenticated: boolean | undefined
 
+  readonly isLoggedIn = authState(this.auth)
+
   currentUserID: string = ''
 
-  constructor(private auth: AngularFireAuth, private router: Router) {
-    this.auth.authState.subscribe((user) => {
+  constructor(private authFire: AngularFireAuth, private router: Router, private auth: Auth) {
+    this.authFire.authState.subscribe((user) => {
       if (user) {
         this.userData = user
         localStorage.setItem('user', JSON.stringify(this.userData))
@@ -44,7 +47,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    return from(this.auth.signInWithEmailAndPassword(email, password)).subscribe((user: any) => {
+    return from(this.authFire.signInWithEmailAndPassword(email, password)).subscribe((user: any) => {
       this.currentUserID = user.user.uid
       this.isAuthenticated = true
       this.router.navigate([''])
@@ -52,7 +55,7 @@ export class AuthService {
   }
 
   signup(userName: string, email: string, password: string) {
-    return this.auth.createUserWithEmailAndPassword(email, password).then(user => {
+    return this.authFire.createUserWithEmailAndPassword(email, password).then(user => {
       this.router.navigate([''])
       user.user?.updateProfile({
         displayName: userName,
@@ -61,7 +64,7 @@ export class AuthService {
   }
 
   logout() {
-    return from(this.auth.signOut()).subscribe(() => {
+    return from(this.authFire.signOut()).subscribe(() => {
       this.isAuthenticated = false
       this.router.navigate(['/login'])
     })
