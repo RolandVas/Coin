@@ -22,6 +22,7 @@ export class FirestoreService {
     .add(transaction)
     .then( (doc: any) => {
       this.updateDocWithId(doc.id, transaction, category)
+      console.log('id:', doc.id)
     });
   }
 
@@ -34,13 +35,13 @@ export class FirestoreService {
       .update({ id: id })
   }
 
-  updateDoc(category: string, transaction: any, categoryObject: any) {
+  updateDoc(category: string, docID: any, categoryObject: any) {
     this.firestore
       .collection('users')
       .doc(this.authService.userData.uid)
       .collection(category)
-      .doc(transaction)
-      .update({ category: categoryObject })
+      .doc(docID)
+      .update(categoryObject)
   }
 
   getTransactionFromFirebase(value: string) {
@@ -61,11 +62,11 @@ export class FirestoreService {
       .valueChanges();
   }
 
-  deleteTransactionFromFirebase(transaction: any) {
+  deleteTransactionFromFirebase(transaction: any, collectionName: string) {
     this.firestore
       .collection('users')
       .doc(this.authService.userData.uid)
-      .collection<TransactionOfMoney>(this.transactions)
+      .collection(collectionName)
       .doc(transaction.id)
       .delete()
   }
