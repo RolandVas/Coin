@@ -35,7 +35,9 @@ export class BodyComponent implements OnInit, OnDestroy {
   }
 
   deleteTransaction(transaction: TransactionOfMoney) {
-    this.firestore.deleteTransactionFromFirebase(transaction);
+    const month = new Date(transaction.date!).getMonth()
+    const year = new Date(transaction.date!).getFullYear()
+    this.firestore.deleteTransactionFromFirebase(transaction, month, year);
   }
 
   ngOnDestroy(): void {
@@ -43,7 +45,8 @@ export class BodyComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  navigate(id?: string) {
-    this.router.navigate([id]);
+  navigate(transaction: TransactionOfMoney) {
+    this.appService.setTransaction(transaction);
+    this.router.navigate([transaction.id]);
   }
 }

@@ -19,28 +19,24 @@ export class FirestoreService {
       .collection('users')
       .doc(this.authService.userData.uid)
       .collection(category, ref => ref.orderBy('date', 'desc'))
-    .add(transaction)
-    .then( (doc: any) => {
-      this.updateDocWithId(doc.id, transaction, category)
-    });
+      .doc(`${transaction.year}`)
+      .collection(`${transaction.month}`)
+      .add(transaction.data)
+      .then( (doc: any) => {
+        console.log('save')
+        this.updateDocWithId(doc.id, transaction, category)
+      });
   }
 
-  updateDocWithId(id: string, transaction: string, category: string) {
+  updateDocWithId(id: string, transaction: any, category: string) {
     this.firestore
       .collection('users')
       .doc(this.authService.userData.uid)
       .collection(category)
+      .doc(`${transaction.year}`)
+      .collection(`${transaction.month}`)
       .doc(id)
       .update({ id: id })
-  }
-
-  updateDoc(category: string, transaction: any, categoryObject: any) {
-    this.firestore
-      .collection('users')
-      .doc(this.authService.userData.uid)
-      .collection(category)
-      .doc(transaction)
-      .update({ category: categoryObject })
   }
 
   getTransactionFromFirebase(value: string) {
@@ -49,6 +45,8 @@ export class FirestoreService {
       .collection('users')
       .doc(user.uid)
       .collection<any>(value)
+      .doc('2024')
+      .collection('5')
       .valueChanges();
   }
 
@@ -58,25 +56,42 @@ export class FirestoreService {
       .collection('users')
       .doc(user.uid)
       .collection<any>(value, ref => ref.orderBy('date', 'desc'))
+      .doc('2024')
+      .collection('5')
       .valueChanges();
   }
 
-  deleteTransactionFromFirebase(transaction: any) {
+  deleteTransactionFromFirebase(transaction: any, month: number, year: number) {
     this.firestore
       .collection('users')
       .doc(this.authService.userData.uid)
       .collection<TransactionOfMoney>(this.transactions)
+      .doc(`${year}`)
+      .collection(`${month}`)
       .doc(transaction.id)
       .delete()
   }
 
-  getOneTransactionFromFirebase(id: string) {
+
+  // braucht man das würklich für expediture.component? im appService kann man das transaction ja speichern
+  getOneTransactionFromFirebase(transaction: any, month: number, year: number) {
     return this.firestore
       .collection('users')
       .doc(this.authService.userData.uid)
       .collection<TransactionOfMoney>(this.transactions)
-      .doc(id)
+      .doc(`${year}`)
+      .collection(`${month}`)
+      .doc(transaction.id)
       .valueChanges()
+  }
+
+  getCategorysFromFirebase(value: string) {
+    let user = this.authService.getCurrentUser()
+    return this.firestore
+      .collection('users')
+      .doc(user.uid)
+      .collection<any>(value)
+      .valueChanges();
   }
 
 }

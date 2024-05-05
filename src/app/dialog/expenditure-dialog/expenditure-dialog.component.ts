@@ -11,6 +11,10 @@ import { Categorys } from 'src/app/_interface/category';
   styleUrls: ['./expenditure-dialog.component.scss']
 })
 export class ExpenditureDialogComponent implements OnInit {
+
+  private currentMonth: number = new Date().getMonth() + 1
+  private currentYear: number = new Date().getFullYear()
+
   public categorysFormFirebase: Categorys[] | undefined
 
   expeditureForm: FormGroup = new FormGroup ({
@@ -24,10 +28,11 @@ export class ExpenditureDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ExpenditureDialogComponent>,
     public appService: FirestoreService,
     ) {
+
   }
 
   ngOnInit(): void {
-    this.appService.getTransactionFromFirebase('categorys').subscribe((category: Categorys[]) => 
+    this.appService.getCategorysFromFirebase('categorys').subscribe((category: Categorys[]) => 
     this.categorysFormFirebase = category
     )
   }
@@ -39,7 +44,12 @@ export class ExpenditureDialogComponent implements OnInit {
   onSubmit() {
     const date: any = Date.now()
     this.expeditureForm.controls['date'].setValue(date)
-    const transaction: TransactionOfMoney = this.expeditureForm.value
+    this.expeditureForm.patchValue({date: date})
+    const transaction = {
+      year: this.currentYear,
+      month: this.currentMonth,
+      data: this.expeditureForm.value
+    }
     this.appService.saveTransactionOnFirebase(transaction, 'transactions')
     this.dialogRef.close();
   }

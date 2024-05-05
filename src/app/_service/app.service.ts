@@ -10,11 +10,16 @@ interface GroupedTransactions {
 })
 export class AppService {
 
+  private currentMonth: number = new Date().getMonth() + 1
+
   public totalAmount: number = 0
 
-  public groupedTransactions: { [key: string]: TransactionOfMoney[] } = {};
+  public groupedTransactions: { [key: string]: TransactionOfMoney[] } = {}
+
+  private currentTransaction: TransactionOfMoney | undefined
 
   constructor() {
+    console.log(this.currentMonth)
   }
 
   groupTransactionsByDate(transactions: TransactionOfMoney[]): { [key: string]: TransactionOfMoney[] } {
@@ -43,7 +48,7 @@ export class AppService {
   calculateTotalAmount(data: GroupedTransactions | TransactionOfMoney[]): number {
     if (Array.isArray(data)) {
       // Wenn es sich um ein Array von Transaktionen handelt
-      return data.reduce((sum, transaction) => +sum + +transaction.amount, 0);
+      return data.reduce((sum, transaction) => +sum + +transaction.amount!, 0);
     } else {
       // Wenn es sich um ein Objekt von gruppierten Transaktionen handelt
       let totalAmount = 0;
@@ -54,6 +59,14 @@ export class AppService {
       }
       return totalAmount;
     }
+  }
+
+  setTransaction(transaction: TransactionOfMoney) {
+    this.currentTransaction = transaction;
+  }
+
+  getTransaction(): TransactionOfMoney | undefined {
+    return this.currentTransaction;
   }
 
 }
