@@ -9,8 +9,9 @@
 
 
 <div class="padding-s2" *ngIf="appService.groupedTransactions; else noItems">
-  <div *ngFor="let dateKey of getGroupedTransactionKeys()">
-    <h2>{{ dateKey | date:'yyyy.MM.dd' }}</h2>
+  <div class="test1" *ngFor="let dateKey of getGroupedTransactionKeys()">
+    <div class="expediture-headline">{{ dateKey | date:'yyyy.MM.dd' }}</div>
+    <hr>
     <div class="expediture-card" *ngFor="let transaction of appService.groupedTransactions[dateKey]">
       <div class="expediture-card-icon">
         <img [src]='transaction.category!.img'>
@@ -24,7 +25,7 @@
         </button>
         <mat-menu #menu="matMenu">
           <button (click)="deleteTransaction(transaction)" mat-menu-item>Delete</button>
-          <button (click)="navigate(transaction.id)" mat-menu-item>Details</button>
+          <button (click)="navigate(transaction)" mat-menu-item>Details</button>
         </mat-menu>
       </div>
     </div>

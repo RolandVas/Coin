@@ -30,7 +30,7 @@ export class CategoryComponent implements OnInit {
   constructor(private firestore: FirestoreService) { }
 
   ngOnInit(): void {
-    this.firestore.getTransactionFromFirebase('categorys').subscribe((category: Categorys[]) => 
+    this.firestore.getCategorysFromFirebase('categorys').subscribe((category: Categorys[]) => 
     this.categorysFormFirebase = category
     )
   }
